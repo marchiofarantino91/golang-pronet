@@ -1,2 +1,3 @@
-# golang-pronet
-Pemograman Jaringan - 1301154302
+# Pemograman Jaringan -
+NAMA    -   MARCHIO FARANTINO
+NIM     -   1301154302
