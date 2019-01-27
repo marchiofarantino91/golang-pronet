@@ -18,7 +18,7 @@ func main()  {
 		conn, err := net.DialTCP("tcp", nil, tcpAddr)
 		checkError(err)
 
-		_, err = conn.Write([]byte("HEAD /HTTP/1.0\r\n\r\n"))
+		_, err = conn.Write([]byte("HEAD / HTTP/1.0\r\n\r\n"))
 		checkError(err)
 
 		result, err := ioutil.ReadAll(conn)

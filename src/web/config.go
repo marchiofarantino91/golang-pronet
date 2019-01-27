@@ -50,7 +50,7 @@ func NewCfg(path ...string) (*Config, error) {
 
 	if len(path) > 0 {
 		if err := loadConfPath(v,path[0]); err != nil {
-			log.Println("file not found, load default configuration.")
+			log.Println("file not found, load default")
 		}
 	}
 	return &Config{v},nil

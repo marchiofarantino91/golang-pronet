@@ -16,7 +16,7 @@ func main()  {
 	check(err,"server is ready.")
 	for{
 		conn,err := ln.Accept()
-		check(err, "accepted connection.")
+		check(err, "Accepted Connection.")
 
 		go func(){
 			buf := bufio.NewReader(conn)
@@ -25,10 +25,10 @@ func main()  {
 				name,err := buf.ReadString('\n')
 
 				if err != nil{
-					fmt.Printf("Client disconect")
+					fmt.Printf("Client Disconect")
 					break
 				}
-				conn.Write([]byte("hello," +name))
+				conn.Write([]byte("Hello," +name))
 			}
 		}()
 	}
