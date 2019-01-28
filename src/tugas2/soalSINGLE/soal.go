@@ -27,7 +27,7 @@ func main() {
 				name, err := buf.ReadString('\n')
 
 				if err != nil {
-					fmt.Printf("Client Disconect")
+					fmt.Printf("Client Dis conect")
 					break
 				}
 				conn.Write([]byte("Hello," + name))
