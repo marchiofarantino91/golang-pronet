@@ -1,58 +1,60 @@
 package main
 
-import(
+import (
 	"bytes"
 	"io/ioutil"
-	"os"
 	"log"
+	"os"
 
 	"github.com/spf13/viper"
 )
-const	(
-	HTTP_PORT		string="http.port"
-	HTTP_DIR		string="http.dir"
+
+const (
+	HTTP_PORT string = "http.port"
+	HTTP_DIR  string = "http.dir"
 )
-type HttpConfig struct{
-	Port	int
-	Dir		string
+
+type HttpConfig struct {
+	Port int
+	Dir  string
 }
-type Config	struct{
+type Config struct {
 	*viper.Viper
 }
 
-func setDefaults(v *viper.Viper){
-v.SetDefault(HTTP_PORT,8080)
-v.SetDefault(HTTP_DIR,"static")
+func setDefaults(v *viper.Viper) {
+	v.SetDefault(HTTP_PORT, 8080)
+	v.SetDefault(HTTP_DIR, "static")
 }
 
 func loadConfPath(v *viper.Viper, path string) error {
-	_,err := os.Stat(path)
-	if err != nil{
+	_, err := os.Stat(path)
+	if err != nil {
 		return err
-	} 
-	f,err := ioutil.ReadFile(path)
-	if err != nil   {
+	}
+	f, err := ioutil.ReadFile(path)
+	if err != nil {
 		return err
-	}	                          
-		return v.ReadConfig(bytes.NewBuffer(f))
+	}
+	return v.ReadConfig(bytes.NewBuffer(f))
 }
 func (c *Config) HttpCfg() *HttpConfig {
 	return &HttpConfig{
-		Port:	c.GetInt(HTTP_PORT),
-		Dir:	c.GetString(HTTP_DIR),
+		Port: c.GetInt(HTTP_PORT),
+		Dir:  c.GetString(HTTP_DIR),
 	}
 }
 
 func NewCfg(path ...string) (*Config, error) {
-	v:= viper.New()
+	v := viper.New()
 	v.SetConfigType("yaml")
 	setDefaults(v)
 
 	if len(path) > 0 {
-		if err := loadConfPath(v,path[0]); err != nil {
+		if err := loadConfPath(v, path[0]); err != nil {
 			log.Println("file not found, load default")
 		}
 	}
-	return &Config{v},nil
+	return &Config{v}, nil
 
 }
