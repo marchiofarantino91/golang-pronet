@@ -32,13 +32,13 @@ func main() {
 	if err != nil {
 		log.Fatal("arith error:", err)
 	}
-	fmt.Println("Arith: %d*%d=%d\n", args.A, args.B, reply)
+	fmt.Printf("Arith: %d*%d=%d\n", args.A, args.B, reply)
 
 	var quot Quotient
 	err = client.Call("Arith.Divide", args, &quot)
 	if err != nil {
 		log.Fatal("arith error:", err)
 	}
-	fmt.Println("Arith: %d/%d=%d remainder %d\n", args.A, args.B, quot.Quo, quot.Rem)
+	fmt.Printf("Arith: %d/%d=%d remainder %d\n", args.A, args.B, quot.Quo, quot.Rem)
 
 }
